@@ -109,21 +109,44 @@
 
 <script>
 
-    function generateVideo() {
+async function generateVideo() {
 
-        const prompt = document.getElementById("prompt").value;
-        const status = document.getElementById("status");
+    const prompt = document.getElementById("prompt").value;
+    const status = document.getElementById("status");
 
-        if (!prompt.trim()) {
-            status.innerText = "Najpierw wpisz opis filmu.";
-            return;
-        }
+    if (!prompt.trim()) {
+        status.innerText = "Najpierw wpisz opis filmu.";
+        return;
+    }
+
+    status.innerText = "⏳ Wysyłam prompt do AI...";
+
+    try {
+
+        const response = await fetch("http://127.0.0.1:8000/generate", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                prompt: prompt
+            })
+        });
+
+        const data = await response.json();
 
         status.innerText =
-            "⏳ Generator AI zostanie uruchomiony...";
+            "✅ Serwer otrzymał: " + data.prompt;
 
-        console.log("Prompt:", prompt);
+    } catch (error) {
+
+        status.innerText =
+            "❌ Nie udało się połączyć z serwerem.";
+
+        console.error(error);
     }
+}
+
 
 </script>
 
