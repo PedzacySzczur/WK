@@ -1,36 +1,130 @@
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WK</title>
+<!DOCTYPE html> <html lang="pl"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WK2030 - AI Video</title>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background: #f2f2f2;
-            padding: 40px;
-        }
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background: #f2f2f2;
+        padding: 40px;
+        margin: 0;
+    }
 
-        video {
-            width: 800px;
-            max-width: 100%;
-            margin-top: 30px;
-        }
-    </style>
-</head>
+    h1 {
+        font-size: 48px;
+        margin-bottom: 10px;
+    }
 
-<body>
+    video {
+        width: 800px;
+        max-width: 100%;
+        margin-top: 30px;
+        border-radius: 12px;
+    }
 
-    <h1>WK2030!</h1>
+    .generator {
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 30px;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+    }
 
-    <p>45</p>
+    textarea {
+        width: 100%;
+        box-sizing: border-box;
+        min-height: 120px;
+        padding: 15px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        resize: vertical;
+    }
 
-    <video autoplay muted loop playsinline>
-        <source src="film.mp4" type="video/mp4">
-        Sorry.
+    button {
+        margin-top: 15px;
+        padding: 15px 30px;
+        font-size: 18px;
+        font-weight: bold;
+        color: white;
+        background: #111;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #333;
+    }
+
+    #status {
+        margin-top: 20px;
+        font-weight: bold;
+    }
+
+    #generatedVideo {
+        display: none;
+    }
+</style>
+
+</head> <body>
+<h1>WK2030!</h1>
+
+<p>45</p>
+
+<video autoplay muted loop playsinline>
+    <source src="film.mp4" type="video/mp4">
+    Sorry.
+</video>
+
+
+<div class="generator">
+
+    <h2>🎬 AI VIDEO</h2>
+
+    <p>Opisz film, który chcesz wygenerować:</p>
+
+    <textarea
+        id="prompt"
+        placeholder="Np. futurystyczny stadion piłkarski nocą, światła, tłum kibiców..."
+    ></textarea>
+
+    <br>
+
+    <button onclick="generateVideo()">
+        🎬 GENERUJ VIDEO
+    </button>
+
+    <div id="status"></div>
+
+    <video
+        id="generatedVideo"
+        controls
+        playsinline>
     </video>
 
-</body>
-</html>
+</div>
+
+
+<script>
+
+    function generateVideo() {
+
+        const prompt = document.getElementById("prompt").value;
+        const status = document.getElementById("status");
+
+        if (!prompt.trim()) {
+            status.innerText = "Najpierw wpisz opis filmu.";
+            return;
+        }
+
+        status.innerText =
+            "⏳ Generator AI zostanie uruchomiony...";
+
+        console.log("Prompt:", prompt);
+    }
+
+</script>
+
+</body> </html>
